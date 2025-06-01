@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: write  # Required to commit the lock file if needed
+  contents: write  # Required to commit the lock file
 
 jobs:
   build-and-deploy:
@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          # Removed `cache: npm` to avoid lock file error
 
       - name: Install dependencies (generate lock file if missing)
         run: |
@@ -26,28 +27,28 @@ jobs:
             echo "package-lock.json found. Using npm ci..."
             npm ci
           else
-            echo "package-lock.json not found. Using npm install to generate it..."
+            echo "package-lock.json not found. Running npm install to generate it..."
             npm install
           fi
 
-      - name: Generate and commit lock file if missing
+      - name: Commit lock file if it was generated
         run: |
           if [ ! -f package-lock.json ]; then
-            echo "No lock file found, nothing to commit."
+            echo "No lock file present after install. Skipping commit."
             exit 0
           fi
 
           if git diff --quiet package-lock.json; then
-            echo "No changes to lock file."
+            echo "No changes to lock file. Nothing to commit."
             exit 0
           fi
 
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add package-lock.json
-          git commit -m "Generate package-lock.json [CI skip]" || echo "No changes to commit"
+          git commit -m "Generate package-lock.json [skip ci]" || echo "No changes to commit"
           git push
-        continue-on-error: true  # Prevent workflow failure if push fails (e.g., no permission)
+        continue-on-error: true
 
       - name: Build project
         run: npm run build
