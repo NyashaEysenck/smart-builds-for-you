@@ -1,0 +1,136 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 212 25% 17%; /* Charcoal #1E2937 */
+    --foreground: 210 30% 96%; /* Off-white #F2F5F8 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 30% 96%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 30% 96%;
+
+    --primary: 187 75% 28%; /* Deep teal #106D7C */
+    --primary-foreground: 210 30% 96%;
+
+    --secondary: 39 76% 60%; /* Soft amber #E8B64C */
+    --secondary-foreground: 212 25% 17%;
+
+    --muted: 212 20% 27%;
+    --muted-foreground: 210 20% 80%;
+
+    --accent: 187 68% 65%; /* Pale cyan #64D2E6 */
+    --accent-foreground: 212 25% 17%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 30% 96%;
+
+    --border: 212 20% 27%;
+    --input: 212 20% 27%;
+    --ring: 187 75% 28%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 212 25% 17%;
+    --sidebar-foreground: 210 30% 96%;
+    --sidebar-primary: 187 75% 28%;
+    --sidebar-primary-foreground: 210 30% 96%;
+    --sidebar-accent: 187 68% 65%;
+    --sidebar-accent-foreground: 212 25% 17%;
+    --sidebar-border: 212 20% 27%;
+    --sidebar-ring: 187 75% 28%;
+  }
+
+  /* Light mode colors */
+  :root.light-mode {
+    --background: 210 30% 96%; /* Off-white #F2F5F8 */
+    --foreground: 212 25% 17%; /* Charcoal #1E2937 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 212 25% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 212 25% 17%;
+
+    --primary: 187 75% 28%; /* Keep teal */
+    --primary-foreground: 210 30% 96%;
+
+    --secondary: 39 76% 60%; /* Keep amber */
+    --secondary-foreground: 212 25% 17%;
+
+    --muted: 212 20% 90%;
+    --muted-foreground: 212 20% 40%;
+
+    --accent: 187 68% 45%; /* Darker cyan for light mode */
+    --accent-foreground: 210 30% 96%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 30% 96%;
+
+    --border: 212 20% 80%;
+    --input: 212 20% 80%;
+    --ring: 187 75% 28%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image: radial-gradient(hsla(var(--foreground) / 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .section-padding {
+    @apply py-20 px-6 sm:px-8 md:px-12 lg:px-16;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-md transition-all duration-300 font-medium hover:shadow-lg;
+  }
+  
+  .btn-secondary {
+    @apply bg-white border border-primary text-primary hover:bg-primary/10 px-6 py-3 rounded-md transition-all duration-300 font-medium hover:shadow-lg;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+  
+  .heading-gradient {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+}
+
+/* Enhanced animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Add hover effects to cards and service items */
+.service-card:hover,
+.project-card:hover,
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
