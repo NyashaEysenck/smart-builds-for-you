@@ -19,36 +19,52 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbyhvxBEVfRiMr2__O2I8qX4QaUlnylko84i5gaj1Zxo45MCjG_KbqTEOPIo5QdXSaCy/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-  
-      const result = await response.json();
-      
-      if (result.success) {
-        alert("Thank you for your message! I'll get back to you soon.");
-        setFormData({
-          name: "",
-          email: "",
-          projectType: "",
-          message: "",
-        });
-      } else {
-        throw new Error(result.message);
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      alert("There was an error submitting your message. Please try again.");
-    }
-  };
+  e.preventDefault();
 
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbyhvxBEVfRiMr2__O2I8qX4QaUlnylko84i5gaj1Zxo45MCjG_KbqTEOPIo5QdXSaCy/exec', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    // Check if response is ok
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Thank you for your message! I'll get back to you soon.");
+      setFormData({
+        name: "",
+        email: "",
+        projectType: "",
+        message: "",
+      });
+    } else {
+      throw new Error(result.message || 'Unknown error from server');
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    
+    // Show detailed error message
+    let errorMessage = "There was an error submitting your message: ";
+    
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      errorMessage += "Network error - please check your internet connection.";
+    } else if (error.message.includes('HTTP')) {
+      errorMessage += `Server error (${error.message})`;
+    } else {
+      errorMessage += error.message;
+    }
+    
+    alert(errorMessage);
+  }
+};
   return (
     <section id="contact" className="section-padding bg-background/80">
       <div className="container mx-auto">
