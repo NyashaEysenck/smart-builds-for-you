@@ -22,28 +22,23 @@ const Contact = () => {
   e.preventDefault();
 
   try {
-    console.log('Submitting form data:', formData); // Debug log
-    
-    const response = await fetch('https://script.google.com/macros/s/AKfycbyhvxBEVfRiMr2__O2I8qX4QaUlnylko84i5gaj1Zxo45MCjG_KbqTEOPIo5QdXSaCy/exec', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
+    const formBody = new URLSearchParams(formData); // ✅ use URL-encoded format
 
-    console.log('Response status:', response.status); // Debug log
-    console.log('Response headers:', response.headers); // Debug log
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
+    const response = await fetch(
+      'https://script.google.com/macros/s/AKfycbyhvxBEVfRiMr2__O2I8qX4QaUlnylko84i5gaj1Zxo45MCjG_KbqTEOPIo5QdXSaCy/exec',
+      {
+        method: 'POST',
+        body: formBody,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
 
     const result = await response.json();
-    console.log('Response data:', result); // Debug log
 
     if (result.success) {
-      alert("Thank you for your message! I'll get back to you soon.");
+      alert("Thank you for your message!");
       setFormData({
         name: "",
         email: "",
@@ -54,19 +49,8 @@ const Contact = () => {
       throw new Error(result.message || 'Unknown error from server');
     }
   } catch (error) {
-    console.error('Full error object:', error); // Debug log
-    
-    let errorMessage = "Error details: ";
-    
-    if (error.name === 'TypeError' && error.message.includes('fetch')) {
-      errorMessage += `Network/CORS error: ${error.message}`;
-    } else if (error.message.includes('HTTP')) {
-      errorMessage += `Server error: ${error.message}`;
-    } else {
-      errorMessage += `${error.name}: ${error.message}`;
-    }
-    
-    alert(errorMessage);
+    console.error('Error:', error);
+    alert('Error submitting form: ' + error.message);
   }
 };
   return (
