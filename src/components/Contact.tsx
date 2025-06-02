@@ -22,6 +22,8 @@ const Contact = () => {
   e.preventDefault();
 
   try {
+    console.log('Submitting form data:', formData); // Debug log
+    
     const response = await fetch('https://script.google.com/macros/s/AKfycbyhvxBEVfRiMr2__O2I8qX4QaUlnylko84i5gaj1Zxo45MCjG_KbqTEOPIo5QdXSaCy/exec', {
       method: 'POST',
       headers: {
@@ -30,12 +32,15 @@ const Contact = () => {
       body: JSON.stringify(formData),
     });
 
-    // Check if response is ok
+    console.log('Response status:', response.status); // Debug log
+    console.log('Response headers:', response.headers); // Debug log
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
 
     const result = await response.json();
+    console.log('Response data:', result); // Debug log
 
     if (result.success) {
       alert("Thank you for your message! I'll get back to you soon.");
@@ -49,17 +54,16 @@ const Contact = () => {
       throw new Error(result.message || 'Unknown error from server');
     }
   } catch (error) {
-    console.error('Error submitting form:', error);
+    console.error('Full error object:', error); // Debug log
     
-    // Show detailed error message
-    let errorMessage = "There was an error submitting your message: ";
+    let errorMessage = "Error details: ";
     
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      errorMessage += "Network error - please check your internet connection.";
+    if (error.name === 'TypeError' && error.message.includes('fetch')) {
+      errorMessage += `Network/CORS error: ${error.message}`;
     } else if (error.message.includes('HTTP')) {
-      errorMessage += `Server error (${error.message})`;
+      errorMessage += `Server error: ${error.message}`;
     } else {
-      errorMessage += error.message;
+      errorMessage += `${error.name}: ${error.message}`;
     }
     
     alert(errorMessage);
