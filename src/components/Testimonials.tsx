@@ -3,20 +3,7 @@ import { Star } from "lucide-react";
 
 const Testimonials = () => {
   const testimonials = [
-    {
-      quote:
-        "Delivered exactly what I needed—even explained things clearly when I had no tech background.",
-      author: "Jamie Smith",
-      position: "Startup Founder",
-      rating: 5,
-    },
-    {
-      quote:
-        "My idea went from a sketch to a working tool in just 10 days.",
-      author: "Alex Johnson",
-      position: "Marketing Director",
-      rating: 5,
-    },
+ 
   ];
 
   return (
