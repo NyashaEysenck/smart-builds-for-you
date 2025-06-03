@@ -112,14 +112,14 @@ const Contact = () => {
               <h3 className="text-xl font-bold mb-4 text-foreground">Contact Information</h3>
               <div className="flex items-center mb-4">
                 <Mail size={20} className="text-accent mr-3" />
-                <a href="mailto:your-email@example.com" className="text-foreground hover:text-accent">
-                  your-email@example.com
+                <a href="mailto: ngandah04@gmail.com" className="text-foreground hover:text-accent">
+                  ngandah04@gmail.com
                 </a>
               </div>
               <div className="flex items-center">
                 <Phone size={20} className="text-accent mr-3" />
-                <a href="tel:+1234567890" className="text-foreground hover:text-accent">
-                  (123) 456-7890
+                <a href="tel:+263781358893" className="text-foreground hover:text-accent">
+                  +263781358893
                 </a>
               </div>
             </div>
