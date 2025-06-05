@@ -12,24 +12,24 @@ const Projects = () => {
       description:
         "Helped users get personalized career recommendations, create professional CVs, prepare for interviews, and receive expert guidance through a smart interface.",
       image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      technologies: ["React", "TensorFlow.js", "Node.js", "MongoDB"],
-      livePreviewUrl: "https://ai-career-guidance.example.com",
+      technologies: ["React", "NLP", "Node.js", "Generative AI"],
+      livePreviewUrl: "#",
     },
     {
       title: "PCOS Smart Insights",
       description:
         "A user-friendly platform that helps individuals manage PCOS by tracking symptoms and offering personalized health tips—powered by advanced logic for better accuracy.",
       image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      technologies: ["Vue.js", "Python", "Django", "PostgreSQL"],
-      livePreviewUrl: "https://pcos-insights.example.com",
+      technologies: ["React", "Mongodb", "Artificial Intelligence", "Express"],
+      livePreviewUrl: "#",
     },
     {
       title: "Cybersecurity Monitoring System",
       description:
         "An intelligent dashboard that protects networks by detecting threats, monitoring connected devices, and sending real-time alerts—all in one simple interface.",
       image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
-      technologies: ["React", "Node.js", "WebSockets", "AWS Lambda"],
-      livePreviewUrl: "https://cyber-monitor.example.com",
+      technologies: ["Arduino", "Node.js", "Python", "FastAPI"],
+      livePreviewUrl: "#",
     },
   ];
 
